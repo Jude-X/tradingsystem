@@ -227,6 +227,41 @@
 			"response": []
 		},
 		{
+			"name": "Cancel Order",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"instrumentId\": \"US0231351067\",\n    \"traderId\": \"traderId2\",\n    \"orderType\": \"SELL\",\n    \"price\": 12,\n    \"quantity\": 10\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/orders/:id",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"orders",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "9f50f7cf-40ae-40db-91f8-5e69c88d9080"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Create Sell Order",
 			"request": {
 				"method": "POST",
