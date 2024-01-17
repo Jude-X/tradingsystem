@@ -1,0 +1,217 @@
+{
+	"info": {
+		"_postman_id": "05005b01-40c8-4e4d-820c-c391bd88dad6",
+		"name": "Trading System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "19067722"
+	},
+	"item": [
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8080/api/health"
+			},
+			"response": []
+		},
+		{
+			"name": "Set Trading Strategy to FIFO",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"strategy\": \"FIFO\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/api/admin/strategy"
+			},
+			"response": []
+		},
+		{
+			"name": "Set Trading Strategy to ProRata",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"strategy\": \"ProRata\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/api/admin/strategy"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Underlying Instrument",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": \"US0231351067\",\n  \"symbol\": \"AMZ\",\n  \"isComposite\": false,\n  \"underlying\": []\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/api/instruments"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Underlying Instrument",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8080/api/instruments/US0231351067"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Composite Instrument",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": \"IE00B5BMR087\",\n  \"symbol\": \"SPY\",\n  \"isComposite\": false,\n  \"underlying\": [\"US0231351067\"]\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/api/instruments"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Composite Instrument",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8080/api/instruments/IE00B5BMR087"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Buy Order",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"instrumentId\": \"US0231351067\",\n    \"traderId\": \"traderId\",\n    \"orderType\": \"BUY\",\n    \"price\": 12,\n    \"quantity\": 10\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/api/orders"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Orders",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8080/api/orders"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Sell Order",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"instrumentId\": \"US0231351067\",\n    \"traderId\": \"traderId2\",\n    \"orderType\": \"SELL\",\n    \"price\": 12,\n    \"quantity\": 10\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/api/orders"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Order",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8080/api/orders"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Buy Order Composite",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"instrumentId\": \"IE00B5BMR087\",\n    \"traderId\": \"traderId\",\n    \"orderType\": \"BUY\",\n    \"price\": 12,\n    \"quantity\": 10\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/api/orders"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Orders Composite",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8080/api/orders"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Sell Order Composite",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"instrumentId\": \"IE00B5BMR087\",\n    \"traderId\": \"traderId2\",\n    \"orderType\": \"SELL\",\n    \"price\": 12,\n    \"quantity\": 10\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/api/orders"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Order Composite",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8080/api/orders"
+			},
+			"response": []
+		}
+	]
+}
