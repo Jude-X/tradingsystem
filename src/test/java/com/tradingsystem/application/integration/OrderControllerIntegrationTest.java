@@ -20,8 +20,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
+
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
@@ -107,5 +107,30 @@ class OrderControllerIntegrationTest {
         // Act and Assert
         mockMvc.perform(MockMvcRequestBuilders.get("/api/orders/{orderId}", nonExistingOrderId))
                 .andExpect(MockMvcResultMatchers.status().isNotFound());
+    }
+
+    @Test
+    void cancelOrder_ValidOrderId_ShouldReturnOk() throws Exception {
+        // Arrange
+        UUID orderId = UUID.randomUUID();
+        doNothing().when(orderService).cancelOrder(orderId);
+
+        // Act and Assert
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/orders/{orderId}", orderId))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().string("Order canceled successfully"));
+    }
+
+    @Test
+    void cancelOrder_InvalidOrderId_ShouldReturnBadRequest() throws Exception {
+        // Arrange
+        UUID orderId = UUID.randomUUID();
+        String errorMessage = "Order Not Found";
+        doThrow(new IllegalArgumentException(errorMessage)).when(orderService).cancelOrder(orderId);
+
+        // Act and Assert
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/orders/{orderId}", orderId))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.content().string(errorMessage));
     }
 }
