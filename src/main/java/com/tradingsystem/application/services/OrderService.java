@@ -32,6 +32,12 @@ public class OrderService {
         orderBooks.put(order.getOrderId(), order);
     }
 
+    public void cancelOrder(UUID orderId) {
+        if(!orderBooks.containsKey(orderId) && completedOrderBooks.containsKey(orderId)) throw new IllegalArgumentException("Order already executed");
+        if(!orderBooks.containsKey(orderId)) throw new IllegalArgumentException("Order Not Found");
+        orderBooks.remove(orderId);
+    }
+
     public Order getOrderById(UUID orderId) {
         if(orderBooks.containsKey(orderId)) return orderBooks.get(orderId);
         return completedOrderBooks.get(orderId);
